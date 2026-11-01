@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Index(3).html</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#eef1f6;--bg2:#dde4ee;--card:rgba(255,255,255,.92);--tx:#0f1b2d;--mu:#5a6a80;--bd:#d3dae6;--ac:#1d4ed8;--sh:0 10px 30px rgba(15,27,45,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b111b;--bg2:#17212f;--card:rgba(18,26,39,.9);--tx:#e7edf6;--mu:#8d9bb0;--bd:#2a3850;--ac:#6ea0ff;--sh:0 10px 30px rgba(0,0,0,.45)}}
+:root[data-theme="dark"]{--bg:#0b111b;--bg2:#17212f;--card:rgba(18,26,39,.9);--tx:#e7edf6;--mu:#8d9bb0;--bd:#2a3850;--ac:#6ea0ff;--sh:0 10px 30px rgba(0,0,0,.45)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{display:flex;flex-direction:column;background:var(--bg);color:var(--tx);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+.top,.nav{display:flex;align-items:center;gap:12px;padding:10px 18px;flex:none}
+.top{justify-content:space-between;border-bottom:1px solid var(--bd);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.top b{color:var(--ac)}
+.stage{flex:1;position:relative;min-height:0;background:radial-gradient(ellipse at 62% 42%,var(--bg2),var(--bg) 70%)}
+#gl{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+.panel{position:absolute;left:18px;top:18px;width:min(370px,calc(100% - 36px));background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--bd);border-radius:16px;padding:20px 22px;box-shadow:var(--sh)}
+.kk{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ac)}
+.panel h2{font-size:22px;line-height:1.2;letter-spacing:-.015em;margin:6px 0 8px}
+.panel p,.panel ul{margin:0;color:var(--mu);font-size:14px}.panel ul{padding-left:18px}.panel li{margin:3px 0}
+.cap{margin-top:14px;padding:10px 12px;border-left:3px solid var(--ac);background:var(--bg);border-radius:0 8px 8px 0;font-size:13.5px;font-weight:500;min-height:42px;animation:fi .5s}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}}
+.tag{position:absolute;left:0;top:0;transform:translate(-50%,-120%);font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:7px;background:var(--card);border:1.5px solid var(--bd);white-space:nowrap;pointer-events:none;display:none;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.nav{justify-content:space-between;border-top:1px solid var(--bd);position:relative}
+.nav .g{display:flex;gap:8px;align-items:center}
+button{font:inherit;font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:9px;border:1px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer}
+button.p{background:var(--ac);border-color:var(--ac);color:#fff}button.on{border-color:var(--ac);color:var(--ac)}
+button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}button:disabled{opacity:.4;cursor:default}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--bd);cursor:pointer;border:0;padding:0}.dot.a{background:var(--ac);width:26px;border-radius:5px}
+#pg{position:absolute;left:0;top:-1px;height:2px;background:var(--ac);width:0}
+.hint{font-size:12px;color:var(--mu)}
+@media (max-width:760px){.panel{top:auto;bottom:10px;left:10px;width:calc(100% - 20px);padding:12px 14px}.panel h2{font-size:17px}.panel p,.panel ul{display:none}.cap{margin-top:8px}.hint,.top span:last-child{display:none}}
+select{font:inherit;font-size:12.5px;padding:5px 8px;border-radius:7px;border:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+.ctl{position:absolute;right:18px;top:18px;background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;box-shadow:var(--sh);display:none}
+.ctl .r{display:flex;align-items:center;gap:8px;margin-top:8px}.ctl .r b{width:84px;font-size:12.5px}
+.phone{position:absolute;right:18px;bottom:18px;width:210px;height:410px;border-radius:32px;background:#0a0f18;padding:9px;box-shadow:0 18px 40px rgba(0,0,0,.4);transform:translateX(140%);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.phone.on{transform:none}
+.scr{width:100%;height:100%;border-radius:24px;background:#f4f7fb;color:#0f1b2d;overflow:hidden;position:relative;font-size:12px}
+.sb{display:flex;justify-content:space-between;padding:9px 16px;font-size:10.5px;font-weight:600}
+.v{position:absolute;inset:32px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;opacity:0;transition:opacity .4s;padding:0 14px;text-align:center}.v.s{opacity:1}
+.v3{justify-content:flex-start;align-items:stretch;text-align:left;padding-top:8px}.v small{color:#5a6a80;font-size:10.5px}
+.wf{position:relative;width:56px;height:56px}.wf i{position:absolute;inset:0;border:2px solid #2f7bff;border-radius:50%;animation:rg 1.6s infinite}.wf i:nth-child(2){animation-delay:.5s}.wf i:nth-child(3){animation-delay:1s}
+@keyframes rg{from{transform:scale(.2);opacity:1}to{transform:scale(1.2);opacity:0}}
+.ld{width:100%;height:6px;border-radius:3px;background:#dbe3ef;overflow:hidden}.ld u{display:block;height:100%;width:0;background:#1d4ed8}.v2.s .ld u{animation:ld 1.4s forwards}
+@keyframes ld{to{width:100%}}
+.big{font-size:38px;font-weight:700;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.big em{font-size:16px;font-style:normal;color:#5a6a80}
+.li{display:flex;align-items:center;gap:6px;margin:6px 0;font-size:11px}.li span{width:46px}.li i{display:block;height:7px;border-radius:4px;background:#1d4ed8}.li b{margin-left:auto;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.ctl{top:10px;right:10px;padding:8px 10px}.phone{width:150px;height:300px;bottom:190px;right:10px;border-radius:24px;padding:6px}.scr{font-size:9px;border-radius:18px}.big{font-size:26px}.li{margin:3px 0;font-size:9px}.li span{width:36px}}
+.ctl .r{flex-wrap:wrap}.ctl small{color:var(--mu);font-size:11.5px}
+.sg{display:flex;gap:4px}.sg button{padding:5px 10px;font-size:12px;border-radius:7px}.sg button.a{background:var(--ac);border-color:var(--ac);color:#fff}
+.st{display:flex;gap:6px;margin:8px 0 2px}.st div{flex:1;background:#e6ecf5;border-radius:8px;padding:6px 2px;text-align:center}.st b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+.cm{display:flex;justify-content:space-between;gap:8px;margin:6px 0;padding:7px 9px;border-radius:8px;background:#e6ecf5;font-size:11px}.cm b{font-variant-numeric:tabular-nums;white-space:nowrap}.cm.n{background:#dbe7ff;outline:1.5px solid #1d4ed8}
+.stt{font-size:10.5px;font-weight:700;color:#1d4ed8;margin:2px 0}.stt.d{color:#16875a}.big.dn{color:#16875a}
+.panel #cmp{margin-top:10px;display:none}.panel .stt{color:var(--ac);margin:0 0 4px}.panel .stt.d{color:#16875a}.cm{color:#0f1b2d}
+</style></head><body>
+<div class="top"><span><b>Wi-Fi 2,4 GHz</b> · Laboratório de informática</span><span id="ct"></span></div>
+<div class="stage" id="stg"><canvas id="gl"></canvas>
+<div class="panel"><div class="kk" id="kk"></div><h2 id="tt"></h2><p id="pp"></p><div class="cap" id="cp"></div><div id="cmp"></div></div>
+<div class="ctl" id="ctl"><div class="kk">Ajustes ao vivo</div><div id="rows"></div><button class="p" id="ms" style="margin-top:10px;width:100%;display:none">Medir agora</button></div>
+</div>
+<div class="nav"><div id="pg"></div>
+<div class="g"><button id="pv">Anterior</button><button class="p" id="nx">Próximo</button></div>
+<div class="g" id="dots"></div>
+<div class="g"><span class="hint">Arraste para girar a cena</span><button id="rp">Repetir</button><button id="au">Auto</button></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id),f1=n=>n.toFixed(1).replace('.',','),V=(x,y,z)=>new THREE.Vector3(x,y,z);
+/* ---- modelo (canal, banda e sobreposição) ---- */
+const PX=70,RA={x:200,y:185},RB={x:640,y:140},RC={x:350,y:-32,w:1};
+const ph=[];let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const BX=[100,400],BY=[220,335,450];
+for(let r=0;r<3;r++)for(let c=0;c<2;c++){const n=(r==0&&c==0)?2:(r==2&&c==1)?4:0;for(let k=0;k<n;k++)ph.push({x:BX[c]+200*(k+.5)/n,y:BY[r]+46,row:r,n:.9+rnd()*.2})}
+/* 2,4 GHz: 4 canais; 5 e 6 GHz: mais espectro e sem redes vizinhas, mas menos alcance e mais perda no concreto */
+const BD={2.4:{pl:0,wall:0,ob:1,max:60,nb:2,rng:1,ch:[1,3,6,11],d0:11},5:{pl:7,wall:8,ob:1.3,max:120,nb:0,rng:.8,ch:[36,149],d0:36},6:{pl:9,wall:12,ob:1.5,max:180,nb:0,rng:.65,ch:[5,37],d0:5}};
+function rss(Q,h,p,b){const dx=(p.x-Q.x)/PX,dy=(p.y-Q.y)/PX,dz=h-.75,d=Math.max(1,Math.hypot(dx,dy,dz));const ob=Q.w?20+b.wall+p.row*3:(h<1.2?(p.row+1)*4+6:p.row+2)*b.ob;return -40-32*Math.log10(d)-ob-b.pl}
+const sp=(r,b)=>Math.max(1,Math.min(b.max,(r+92)/47*b.max));
+const mkU=o=>{const u={A:{band:2.4,ch:11},B:{band:2.4,ch:11},C:{band:2.4,ch:11}};if(o)for(const k in o)Object.assign(u[k],o[k]);return u};
+const ov=(a,b)=>a.band!==b.band?0:a.band===2.4?Math.max(0,1-Math.abs(a.ch-b.ch)/5):a.ch===b.ch?1:0;
+const PG=ph.map(()=>20),pgc=ph.map(()=>20);
+function speeds(Z,U){return ph.map((p,i)=>{const c=!!Z.C,b=BD[U[c?'C':'A'].band];let r=rss(c?RC:RA,c?1.8:(Z.hs||2.6),p,b),f=1;
+ if(Z.B&&!c){const o=ov(U.A,U.B);if(o>0){const rb=rss(RB,2.6,p,BD[U.B.band]),m=Math.max(r,rb),pw=Math.pow(10,(Math.min(r,rb)-m)/10);f=1-(1-.55/(1+pw*1.5))*o}}
+ const q=sp(r,b);PG[i]=Math.round(10+70*(1-q/b.max)+b.nb*2+(1-f)*60);
+ return q*p.n*f*(1-.045*b.nb)})}
+const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+const SCN=[[{A:1,hs:.65}],[{A:1,hs:2.6}],[{A:1,B:1,hs:2.6}],[{C:1}],[{A:1,hs:2.6},{A:{band:5}}],[{A:1,hs:2.6},{A:{band:6}}]];
+const AV=SCN.map(([z,o])=>mean(speeds(z,mkU(o)))),MX=Math.max(...AV);
+const cur=speeds({A:1,hs:.75},mkU()),MBp=[0,1,2].map(()=>ph.map(()=>0));
+const colH=v=>v<15?0xc93b3b:v<35?0xd98a0b:0x16875a,colC=v=>v<15?'#c93b3b':v<35?'#d98a0b':'#16875a';
+/* ---- slides ---- */
+const SL=[
+{k:'Visão geral',t:'A sala completa em 360°',p:'Uma volta pela sala: o quadro com a apresentação do TCC, os cinco apresentadores, as bancadas com os alunos e o roteador A sobre a mesa do professor.',pl:[],cap:[[0,'A sala em 3D: roteador, bancadas, alunos e a parede de concreto.'],[2,'Giro de 360°: os cinco apresentadores do TCC diante do quadro com o slide.'],[7,'Os alunos nas bancadas, de frente para a apresentação.'],[11,'O rack com o patch panel distribui a internet até o roteador A, sobre a mesa do professor.'],[16,'Nos próximos slides medimos os MB baixados em cada situação.']],cam:[0,5.5,10.5],tg:[0,1,-.8]},
+{k:'1 · Roteador baixo',t:'Roteador a 0,65 m: as bancadas bloqueiam o sinal',p:'Bancadas, monitores e pessoas absorvem o sinal. Vamos medir quantos MB o aluno baixa com o roteador baixo, a 0,65 m do chão.',pl:['Roteador baixo · 0,65 m'],cap:[[0,'Roteador a 0,65 m: as bancadas piscam em vermelho, são as barreiras no caminho do sinal.'],[2.5,'Os alunos pegam o celular, conectam e abrem a plataforma de dados.'],[5.5,'Medindo 4 s com o roteador baixo.'],[9.5,'Medição concluída: o contador parou. Guarde esse valor para comparar no próximo slide.']],cam:[-6.5,5.5,8],tg:[-1.5,1.2,0]},
+{k:'2 · Roteador elevado',t:'Roteador no ponto mais alto, a 2,6 m',p:'Com o roteador elevado, o sinal passa por cima das bancadas e dos monitores. Vamos medir de novo, no mesmo tempo, e comparar com o roteador baixo.',pl:['Roteador alto · 2,6 m'],cap:[[0,'O roteador está no ponto baixo, a 0,65 m.'],[1,'Elevando o roteador até o ponto mais alto, a 2,6 m…'],[4.5,'Os alunos pegam o celular, conectam e abrem a plataforma de dados.'],[7.5,'Medindo 4 s com o roteador no ponto máximo.'],[11.5,'Medição concluída: bem mais MB que com o roteador baixo.']],cam:[-6.5,5.5,8],tg:[-1.5,1.2,0]},
+{k:'3 · Co-interferência',t:'Dois roteadores no mesmo canal se atrapalham',p:'No Wi-Fi de 2,4 GHz só os canais 1, 6 e 11 não se sobrepõem. Dois roteadores no mesmo canal precisam revezar o tempo de transmissão. Troque o canal do roteador B nos ajustes ao vivo e toque em Medir agora para comparar. Teste também o canal 3: ele invade o 1 e o 6.',pl:['Só o roteador A','A + B, mesmo canal','B no canal 1'],cap:[[0,'Só o roteador A, no canal 11.'],[4,'Entra o roteador B, no mesmo canal e na mesma frequência.'],[6,'Os alunos pegam o celular, conectam e abrem a plataforma.'],[8,'Medindo 4 s: as ondas colidem, a velocidade cai e o ping sobe.'],[12,'Agora troque o canal do roteador B em Ajustes ao vivo e toque em Medir agora para ver a diferença.']],cam:[0,9,10],tg:[0,1,0]},
+{k:'4 · Parede de concreto',t:'Conectados ao roteador do outro lado da parede',p:'O roteador C fica no laboratório vizinho, logo atrás da parede frontal. O concreto absorve boa parte da energia do sinal: do lado dos alunos, as ondas chegam bem mais fracas.',pl:['Roteador C · atrás da parede'],cap:[[0,'O roteador C está no outro laboratório, do lado de lá da parede de concreto.'],[2.5,'Os alunos conectam ao roteador C, pegam o celular e abrem a plataforma.'],[5.5,'Medindo 4 s: o concreto atenua cerca de 20 dB e entra pouco MB.'],[9.5,'Medição concluída: compare com o roteador A elevado, na mesma sala.']],cam:[7,5.5,6],tg:[0,1,-1]},
+{k:'Resultado',t:'Velocidade média por cenário',p:'<ul><li>Eleve o roteador e deixe-o longe de obstáculos.</li><li>Use canais 1, 6 ou 11 e evite repetir o canal do vizinho.</li><li>Não dependa de um roteador separado por parede de concreto.</li><li>5 e 6 GHz entregam mais velocidade, mas com menos alcance: eleve o roteador e evite paredes.</li></ul>',pl:[],cap:[[0,'Média por aluno em cada cenário, em Mb/s (modelo ilustrativo).'],[4,'Altura e canais separados recuperam a velocidade; 5 e 6 GHz vão além, mas o concreto segue sendo o pior caso.']],cam:[0,4.6,8.8],tg:[0,1.3,0]}];
+const tot=s=>s.cap[s.cap.length-1][0]+6;
+function st(i,t){
+ const e3=(a,b)=>{const k=Math.min(1,Math.max(0,(t-a)/(b-a)));return k*k*(3-2*k)};
+ if(i===0)return{h:.65,hs:.65,A:1,mA:5,cn:3,ow:3,orb:Math.PI*2*e3(1.5,16)};
+ if(i===1)return{h:.65,hs:.65,A:1,mA:5,warn:t<9.5,ow:3,cn:0};
+ if(i===2){const e=e3(1,4);return{h:.65+1.95*e,hs:t<3?.65:2.6,A:1,mA:5+4*e,warn:t<1.2,ow:3,cn:0}}
+ if(i===3)return{h:2.6,A:1,B:t>=4,mA:9,ow:3,cn:0};
+ if(i===4)return{h:2.6,C:1,mA:9,wall:1,cn:0};
+ return{chart:1}}
+/* celular: cada medição = [aparece, fim conexão, fim plataforma, fim medição (MB para), some, fase] */
+const PS={1:[[2.5,4,5.5,9.5,14,0]],2:[[4.5,6,7.5,11.5,16.5,0]],3:[[6,7,8,12,17,0]],4:[[2.5,4,5.5,9.5,14,0]]};
+const RFS={2:['Roteador baixo · 0,65 m',.65],4:['Roteador A · alto · 2,6 m',2.6]};
+const ACT={};
+/* ---- cena ---- */
+const stg=$('stg'),cv=$('gl'),ren=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+ren.setPixelRatio(Math.min(devicePixelRatio||1,2));ren.localClippingEnabled=true;
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(42,1,.1,100);
+scene.add(new THREE.AmbientLight(0xffffff,.8));const dl=new THREE.DirectionalLight(0xffffff,.55);dl.position.set(4,10,6);scene.add(dl);
+const dark=matchMedia('(prefers-color-scheme:dark)').matches||document.documentElement.dataset.theme==='dark';
+const C={floor:dark?0x1d2737:0xd8dfea,bench:dark?0x4a5b76:0xa9b5c8,desk:dark?0x8a7650:0xc8b087,wall:dark?0x7a808c:0x9aa0a8,mon:dark?0x0c131f:0x1b2433,lab2:dark?0x141c2a:0xc3ccd9,stu:dark?0x93a4bf:0x56657d,stu2:dark?0xb6c4da:0x7a8aa3,line:0x6b7b92};
+const M=c=>new THREE.MeshLambertMaterial({color:c});
+const room=new THREE.Group(),chart=new THREE.Group();scene.add(room,chart);
+const benchMat=M(C.bench),wallMat=M(C.wall);
+function bx(w,h,d,m,x,y,z,par){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);(par||room).add(o);return o}
+function pl(w,d,m,z){const o=new THREE.Mesh(new THREE.PlaneGeometry(w,d),m);o.rotation.x=-Math.PI/2;o.position.z=z;room.add(o)}
+pl(10,8,M(C.floor),0);pl(10,2.7,M(C.lab2),-5.65);
+[[8,0],[2.7,-5.65]].forEach(([d,z])=>{const e=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(10,3,d)),new THREE.LineBasicMaterial({color:C.line}));e.position.set(0,1.5,z);room.add(e)});
+bx(10,3,.3,wallMat,0,1.5,-4.15);
+[-3,0,3].forEach(x=>bx(2.2,.8,.5,M(C.bench),x,.4,-5.9));
+const monMat=M(C.mon),keyMat=M(0x2a3445);
+for(let r=0;r<3;r++)for(let c=0;c<2;c++){const gx=(BX[c]+100-350)/70,gz=(BY[r]+15)/70-4;
+ bx(2.86,.05,.43,benchMat,gx,.75,gz);bx(.05,.75,.4,benchMat,gx-1.36,.375,gz);bx(.05,.75,.4,benchMat,gx+1.36,.375,gz);
+ for(let j=0;j<3;j++){const mx=gx+(j-1)*.9;bx(.34,.22,.03,monMat,mx,.89,gz-.08);bx(.28,.012,.1,keyMat,mx,.78,gz+.1)}}
+const dm=M(C.desk);bx(1.86,.05,.49,dm,-2.143,.6,-1.357);bx(.05,.6,.45,dm,-3.03,.3,-1.357);bx(.05,.6,.45,dm,-1.25,.3,-1.357);
+const stu=ph.map(p=>{const x=(p.x-350)/70,z=p.y/70-4,g=new THREE.Group();g.position.set(x,0,z);room.add(g);
+ const b=new THREE.Mesh(new THREE.CylinderGeometry(.17,.2,.5,16),M(C.stu));b.position.y=.5;g.add(b);
+ const h=new THREE.Mesh(new THREE.SphereGeometry(.13,16,12),M(C.stu2));h.position.y=.88;g.add(h);
+ const q=new THREE.Mesh(new THREE.BoxGeometry(.08,.012,.14),new THREE.MeshBasicMaterial({color:0x888888}));q.position.set(0,.8,-.3);q.scale.setScalar(2.2);g.add(q);return{x,z,q,h}});
+/* apresentadores + projeção do TCC */
+const sc=document.createElement('canvas');sc.width=512;sc.height=288;const g2=sc.getContext('2d'),stx=new THREE.CanvasTexture(sc);
+bx(4.36,2.5,.06,M(0x10151f),0,1.75,-3.97);
+const scrP=new THREE.Mesh(new THREE.PlaneGeometry(4.2,2.36),new THREE.MeshBasicMaterial({map:stx}));scrP.position.set(0,1.75,-3.935);room.add(scrP);
+let ld=-1;const SN=['Baixo','Alto','A+B','Parede','5 GHz','6 GHz'];
+function drawSlide(now){const c=g2,p=Math.floor(now/6)%3,u=(now%6)/6,k=Math.min(1,(now%6)/1.6);
+ c.fillStyle='#f7f9fd';c.fillRect(0,0,512,288);c.fillStyle='#1d4ed8';c.fillRect(0,0,512,40);c.textBaseline='middle';
+ c.fillStyle='#fff';c.font='600 17px Inter,sans-serif';c.textAlign='left';c.fillText('TCC · Redes sem fio',18,21);c.textAlign='right';c.fillText((p+1)+' / 3',496,21);c.textAlign='left';
+ c.fillStyle='#0f1b2d';let lx=90,ly=150;
+ if(p===0){c.font='700 32px Inter,sans-serif';c.fillText('Wi-Fi em laboratórios'.slice(0,Math.floor(Math.min(1,k*1.4)*21)),30,100);c.fillStyle='#1d4ed8';c.fillText('Altura, canal e concreto'.slice(0,Math.floor(Math.max(0,k*1.4-.5)/.9*24)),30,148);
+  c.strokeStyle='#1d4ed8';c.lineWidth=5;c.lineCap='round';[24,44,64].forEach((r,j)=>{c.globalAlpha=.25+.75*(Math.sin(now*3-j)>0?1:.3);c.beginPath();c.arc(256,262,r,Math.PI*1.2,Math.PI*1.8);c.stroke()});c.globalAlpha=1;c.fillStyle='#1d4ed8';c.beginPath();c.arc(256,262,5,0,7);c.fill()}
+ else if(p===1){c.font='700 22px Inter,sans-serif';c.fillText('Velocidade média por cenário',24,68);c.strokeStyle='#cfd8e6';c.lineWidth=2;c.beginPath();c.moveTo(24,252);c.lineTo(488,252);c.stroke();
+  AV.forEach((v,i)=>{const h=v/MX*140*k,x=44+i*74;c.fillStyle=colC(v);c.fillRect(x,252-h,52,h);c.fillStyle='#5a6a80';c.font='600 12px Inter,sans-serif';c.textAlign='center';c.fillText(SN[i],x+26,268);c.textAlign='left'});ly=190;lx=44+((now*40)%370)}
+ else{c.font='700 22px Inter,sans-serif';c.fillText('Conclusões',24,68);c.font='500 20px Inter,sans-serif';['Eleve o roteador','Use os canais 1, 6 e 11','Evite paredes de concreto','5 e 6 GHz: mais velocidade'].forEach((t,i)=>{if(u>.08+i*.2){c.fillStyle='#1d4ed8';c.beginPath();c.arc(40,115+i*40,6,0,7);c.fill();c.fillStyle='#0f1b2d';c.fillText(t,58,115+i*40)}});ly=115+Math.min(3,Math.floor(Math.max(0,u-.08)/.2))*40;lx=300+20*Math.sin(now*2)}
+ c.fillStyle='rgba(225,29,72,.95)';c.beginPath();c.arc(p===0?300+60*Math.sin(now):lx,p===0?190+20*Math.cos(now*1.3):ly,5,0,7);c.fill();
+ [0,1,2].forEach(j=>{c.fillStyle=j===p?'#1d4ed8':'#cfd8e6';c.beginPath();c.arc(236+j*20,280,4,0,7);c.fill()})}
+const pres=[],PC=[0x2f7bff,0xf08a1e,0x16875a,0x9a5ae0,0xc93b3b],skin=M(0xe0b896),pant=M(dark?0x2a3548:0x3b4659);
+[-2.4,-1.2,0,1.2,2.4].forEach((x,i)=>{const g=new THREE.Group();g.position.set(x,0,-3.1);g.rotation.y=Math.PI;room.add(g);const sh=M(PC[i]),add=(geo,m,px,py,pz,par)=>{const o=new THREE.Mesh(geo,m);o.position.set(px,py,pz);(par||g).add(o);return o};
+ [-.075,.075].forEach(lx=>add(new THREE.CylinderGeometry(.06,.06,.7,10),pant,lx,.35,0));
+ add(new THREE.CylinderGeometry(.17,.2,.56,16),sh,0,.98,0);
+ const h=new THREE.Group();h.position.set(0,1.42,0);g.add(h);add(new THREE.SphereGeometry(.13,16,12),skin,0,0,0,h);
+ [-.05,.05].forEach(ex=>add(new THREE.SphereGeometry(.014,6,6),M(0x111111),ex,.03,-.12,h));
+ const m=add(new THREE.BoxGeometry(.06,.03,.02),M(0x7a2b2b),0,-.05,-.125,h);
+ const arm=sx=>{const a=new THREE.Group();a.position.set(sx*.22,1.22,0);g.add(a);add(new THREE.CylinderGeometry(.045,.04,.5,10).translate(0,-.25,0),sh,0,0,0,a);add(new THREE.SphereGeometry(.05,10,8),skin,0,-.52,0,a);return a};
+ pres.push({g,h,m,R:arm(1),L:arm(-1)})});
+function animPres(now){pres.forEach((o,i)=>{const w=now+i*1.3,talk=Math.sin(now*.6+i*2.1)>-.4?1:.1;o.m.scale.y=.3+talk*Math.abs(Math.sin(now*10+i*1.9))*1.3;
+ o.g.rotation.y=Math.PI+.22*Math.sin(now*.35+i*1.7);o.g.position.y=.015*Math.abs(Math.sin(now*2+i));o.h.rotation.x=.08*Math.sin(now*3+i);o.h.rotation.y=.3*Math.sin(now*.5+i*2);
+ let r,l;
+ if(i===0){r=[.9+.45*Math.sin(w*2.2),.15];l=[.7+.4*Math.sin(w*2.2+1.6),-.15]}
+ else if(i===1){const pk=Math.max(0,Math.min(1,Math.sin(now*.5)*2+.5));r=[.2-1.5*pk+.12*Math.sin(now*3)*pk,.2*pk];l=[.5+.3*Math.sin(w*2),-.12]}
+ else if(i===2){r=[.3+.2*Math.sin(now*2),.9+.2*Math.sin(now*2)];l=[.3+.2*Math.sin(now*2+1),-.9-.2*Math.sin(now*2+1)]}
+ else if(i===3){r=[1.2+.05*Math.sin(now*5),.1];l=[.5+.5*Math.abs(Math.sin(now*1.7)),-.2]}
+ else{r=[2.6+.25*Math.sin(now*3),.1];l=[.6+.3*Math.sin(w*2),-.12]}
+ o.R.rotation.set(r[0],0,r[1]);o.L.rotation.set(l[0],0,l[1])})}
+/* rack com patch panel (distribui a internet) */
+const RX=-3.9,RZ=-3.7,rk=M(dark?0x1a2230:0x2b3445),pnl=M(dark?0x8fa0b8:0xaab6c8),prt=M(0x0c121c);
+bx(.66,1.9,.62,rk,RX,.95,RZ);bx(.06,1.9,.04,M(0x0c121c),RX-.3,.95,RZ+.33);bx(.06,1.9,.04,M(0x0c121c),RX+.3,.95,RZ+.33);
+[1.62,1.42].forEach(y=>{bx(.54,.08,.03,pnl,RX,y,RZ+.32);for(let k=0;k<12;k++)bx(.028,.034,.02,prt,RX-.235+k*.0427,y,RZ+.338)});
+bx(.54,.12,.04,M(0x0c121c),RX,1.2,RZ+.32);
+const leds=[];for(let k=0;k<10;k++){const m=new THREE.MeshBasicMaterial({color:0x16875a});bx(.02,.02,.012,m,RX-.22+k*.049,1.2,RZ+.345);leds.push(m)}
+bx(.54,.05,.03,pnl,RX,.98,RZ+.32);bx(.54,.28,.03,M(0x0c121c),RX,.7,RZ+.32);
+const cbP=[V(RX,.03,RZ+.62),V(RX,.03,-1.357),V(-3.05,.03,-1.357),V(-3.05,.64,-1.357),V(-2.143,.64,-1.357)],cbL=[0];
+for(let k=1;k<cbP.length;k++)cbL.push(cbL[k-1]+cbP[k].distanceTo(cbP[k-1]));
+room.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(cbP),new THREE.LineBasicMaterial({color:0xf08a1e})));
+const cbPk=[0,1,2,3].map(()=>{const m=new THREE.Mesh(new THREE.SphereGeometry(.05,8,6),new THREE.MeshBasicMaterial({color:0xffd27a}));room.add(m);return m});
+function rackAnim(now){leds.forEach((m,k)=>m.color.setHex(Math.sin(now*(6+k*.7)+k*2)>-.2?0x2fd58a:0x0f3b2a));
+ const T=cbL[cbL.length-1];cbPk.forEach((m,j)=>{const d=((now*.9+j/cbPk.length)%1)*T;let k=1;while(k<cbL.length-1&&d>cbL[k])k++;m.position.lerpVectors(cbP[k-1],cbP[k],(d-cbL[k-1])/(cbL[k]-cbL[k-1]))})}
+function mkR(col,base,px,pz){const w=new THREE.Group(),g=new THREE.Group(),m=new THREE.MeshLambertMaterial({color:col,emissive:col,emissiveIntensity:.3});
+ g.add(new THREE.Mesh(new THREE.BoxGeometry(.34,.06,.22),m));
+ [-.12,.12].forEach(s=>{const a=new THREE.Mesh(new THREE.CylinderGeometry(.01,.01,.22,6),m);a.position.set(s,.13,0);a.rotation.z=-s*.6;g.add(a)});
+ const p=new THREE.Mesh(new THREE.CylinderGeometry(.015,.015,1,8).translate(0,.5,0),M(0x7b8798));p.position.y=base;
+ w.add(p,g);w.position.set(px,0,pz);room.add(w);return{w,g,p,base,px,pz,col}}
+const A=mkR(0x2f7bff,.63,-2.143,-1.357),B=mkR(0xf08a1e,0,4.143,-2),Cc=mkR(0x9a5ae0,0,0,-4.457);
+function setR(R,y){R.g.position.y=y;R.p.scale.y=Math.max(.001,y-R.base)}
+const rp=R=>V(R.px,R.g.position.y,R.pz);
+/* ondas */
+const hemi=new THREE.SphereGeometry(1,28,14,0,Math.PI*2,0,Math.PI/2);
+const pIn=new THREE.Plane(V(0,0,1),4.15),pOut=new THREE.Plane(V(0,0,-1),-4.15);
+function mkW(col,planes){const a=[];for(let k=0;k<3;k++)planes.forEach(([p,w])=>{const m=new THREE.Mesh(hemi,new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.2,side:THREE.DoubleSide,depthWrite:false,clippingPlanes:[p]}));m.userData={k,w};room.add(m);a.push(m)});return a}
+const wA=mkW(0x2f7bff,[[pIn,1]]),wB=mkW(0xf08a1e,[[pIn,1]]),wC=mkW(0x9a5ae0,[[pOut,1],[pIn,.28]]);
+function upW(ws,pos,mx,amt,t){ws.forEach(m=>{const u=(t*.35+m.userData.k/3)%1;m.position.copy(pos);m.scale.setScalar(Math.max(.02,u*mx));m.material.opacity=(1-u)*.24*amt*m.userData.w;m.visible=amt>.02})}
+/* interferência e links */
+const fl=new THREE.Mesh(new THREE.SphereGeometry(.3,16,12),new THREE.MeshBasicMaterial({color:0xc93b3b,transparent:true,opacity:.7}));room.add(fl);
+const il=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(),V()]),new THREE.LineBasicMaterial({color:0xc93b3b}));room.add(il);
+const links=ph.map(()=>{const l=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(),V()]),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.55}));room.add(l);return l});
+/* gráfico 3D */
+const CX=[-4,-2.4,-.8,.8,2.4,4],CN=['A baixo','A alto','A + B, mesmo canal','C na parede','A em 5 GHz','A em 6 GHz'];
+bx(9.6,.1,3,M(C.floor),0,-.05,0,chart);
+const bars=AV.map((v,i)=>bx(1.1,1,1.1,M(colH(v)),CX[i],0,0,chart));chart.visible=false;
+/* rótulos */
+const tags=[];let I=0,Z={},tS=0,U=mkU(),chE=0,dispPh=-1,S={v:0},lv=0,LB=[];
+function tag(on,pos,txt,col){const el=document.createElement('div');el.className='tag';stg.appendChild(el);tags.push({el,on,pos,txt,col})}
+const fmtB=u=>(u.band===2.4?'2,4':u.band)+' GHz · canal '+u.ch,cn=i=>Z.cn===undefined||tS>Z.cn+.5+i*.45;
+tag(()=>I<5&&!!Z.A,()=>rp(A).add(V(0,.4,0)),()=>'Roteador A · '+fmtB(U.A)+' · '+(A.g.position.y-.06).toFixed(2).replace('.',',')+' m');
+tag(()=>I===3&&Z.B,()=>rp(B).add(V(0,.4,0)),()=>'Roteador B · '+fmtB(U.B));
+tag(()=>I<5&&!!Z.C,()=>rp(Cc).add(V(0,.4,0)),()=>'Roteador C · '+fmtB(U.C)+' · lab. de matemática');
+tag(()=>I===0||I===4,()=>V(-3.2,1.2,-5.6),()=>'Laboratório de matemática');
+tag(()=>I===0,()=>V(RX,2.05,RZ),()=>'Rack · patch panel');
+stu.forEach((u,i)=>tag(()=>I>0&&I<5,()=>V(u.x,1.25,u.z),()=>!cn(i)?'Conectando…':S.v===1?'Abrindo plataforma…':dispPh>=0?(S.meas?'':'✔ ')+f1(MBp[dispPh][i])+' MB':'Conectado',()=>cn(i)?colC(cur[i]):'#2f7bff'));
+AV.forEach((v,i)=>{tag(()=>I===5,()=>V(CX[i],Math.max(.05,bars[i].scale.y)+.1,0),()=>f1(AV[i]*chE)+' Mb/s',()=>colC(v));tag(()=>I===5,()=>V(CX[i],0,1.1),()=>CN[i])});
+/* controles ao vivo: botões de GHz e de canal */
+const ui={};
+['A','B','C'].forEach(k=>{const d=document.createElement('div');d.className='r';
+ d.innerHTML='<b>Roteador '+k+'</b><div class="sg"></div><small>Canal</small><div class="sg"></div>';
+ $('rows').appendChild(d);const [sb,sc]=d.querySelectorAll('.sg');ui[k]={d,sb,sc}});
+function btns(el,items,sel,fn){el.innerHTML='';items.forEach(([v,l])=>{const b=document.createElement('button');b.textContent=l;if(v===sel)b.className='a';b.onclick=()=>fn(v);el.appendChild(b)})}
+function syncUI(){['A','B','C'].forEach(k=>{const u=U[k],{sb,sc}=ui[k];
+ btns(sb,[[2.4,'2,4 GHz'],[5,'5 GHz'],[6,'6 GHz']],u.band,v=>{u.band=v;u.ch=BD[v].d0;syncUI()});
+ btns(sc,BD[u.band].ch.map(c=>[c,String(c)]),u.ch,c=>{u.ch=c;syncUI()})})}
+/* navegação */
+let T0=performance.now()/1e3,az=0,auto=false,lastCap=-1,fired={};
+const dots=$('dots');SL.forEach((s,i)=>{const d=document.createElement('button');d.className='dot';d.title=s.k;d.onclick=()=>go(i);dots.appendChild(d)});
+function go(n){I=Math.max(0,Math.min(SL.length-1,n));T0=performance.now()/1e3;lastCap=-1;U=mkU();fired={};MBp.forEach(a=>a.fill(0));dispPh=-1;lv=0;S={v:0};LB=[];PS[3]=[[6,7,8,12,17,0]];syncUI();const s=SL[I];
+ $('kk').textContent=s.k;$('tt').textContent=s.t;$('pp').innerHTML=s.p;$('ct').textContent=(I+1)+' / '+SL.length;
+ [...dots.children].forEach((d,i)=>d.classList.toggle('a',i===I));$('pv').disabled=I===0;$('nx').disabled=I===SL.length-1}
+$('ms').onclick=()=>{if(I!==3||!Z.B||PS[3].some(q=>tS>=q[0]&&tS<q[4]))return;const n=PS[3].length%2+1;PS[3].push([tS+.2,tS+.2,tS+1.7,tS+5.7,tS+9,n])};
+$('pv').onclick=()=>go(I-1);$('nx').onclick=()=>go(I+1);$('rp').onclick=()=>go(I);
+$('au').onclick=e=>{auto=!auto;e.target.classList.toggle('on',auto)};
+addEventListener('keydown',e=>{if(e.target.tagName==='SELECT')return;if(e.key==='ArrowRight')go(I+1);if(e.key==='ArrowLeft')go(I-1);if(e.key==='r')go(I)});
+let dr=null;cv.onpointerdown=e=>{dr=e.clientX;cv.setPointerCapture(e.pointerId)};cv.onpointermove=e=>{if(dr!==null){az-=(e.clientX-dr)*.006;dr=e.clientX}};cv.onpointerup=cv.onpointercancel=()=>dr=null;
+/* loop */
+const camP=V(...SL[0].cam),camT=V(...SL[0].tg),wa={A:0,B:0,C:0},Y=V(0,1,0);let sw=0,sh=0,lastT=performance.now()/1e3;
+function loop(){const now=performance.now()/1e3,t=now-T0,dt=Math.min(.1,now-lastT),s=SL[I];lastT=now;tS=t;Z=st(I,t);const sg=(PS[I]||[]).find(q=>t>=q[0]&&t<q[4])||null;if(sg&&!sg.l){sg.l=1;MBp[sg[5]].fill(0);if(I===3)LB[sg[5]]='A canal '+U.A.ch+' · B canal '+U.B.ch}
+ (ACT[I]||[]).forEach((a,j)=>{const k=I+'_'+j;if(t>=a[0]&&!fired[k]){fired[k]=1;a[1]()}});
+ Z.interf=!!(Z.B&&!Z.C&&ov(U.A,U.B)>0);
+ const w=stg.clientWidth,h=stg.clientHeight;
+ if(w!==sw||h!==sh){sw=w;sh=h;ren.setSize(w,h,false);cam.aspect=w/h;if(w/h>1.3&&w>900)cam.setViewOffset(w,h,-170,0,w,h);else cam.clearViewOffset();cam.updateProjectionMatrix()}
+ let cp='';s.cap.forEach(c=>{if(t>=c[0])cp=c[1]});if(cp!==lastCap){lastCap=cp;const e=$('cp');e.textContent=cp;e.style.animation='none';e.offsetWidth;e.style.animation=''}
+ $('pg').style.width=Math.min(100,t/tot(s)*100)+'%';
+ room.visible=!Z.chart;chart.visible=!!Z.chart;
+ $('ctl').style.display=I>0&&I<5?'block':'none';$('ms').style.display=I===3?'block':'none';$('ms').disabled=!(I===3&&Z.B&&!sg);['A','B','C'].forEach(k=>ui[k].d.style.display=Z[k]?'flex':'none');
+ if(Z.chart){chE=1-Math.pow(1-Math.min(1,t/3),3);bars.forEach((b,i)=>{b.scale.y=Math.max(.001,AV[i]/MX*3.2*chE);b.position.y=b.scale.y/2})}
+ else{
+  setR(A,(Z.h||2.6)+.06);setR(B,2.6);setR(Cc,1.8);B.w.visible=!!Z.B;Cc.w.visible=!!Z.C;
+  wa.A+=((Z.A?1:0)-wa.A)*.08;wa.B+=((Z.B?1:0)-wa.B)*.08;wa.C+=((Z.C?1:0)-wa.C)*.08;
+  upW(wA,rp(A),(Z.mA||9)*BD[U.A.band].rng,wa.A,now);upW(wB,rp(B),9*BD[U.B.band].rng,wa.B,now);upW(wC,rp(Cc),9*BD[U.C.band].rng,wa.C,now);
+  benchMat.emissive.setHex(Z.warn?0xc93b3b:0);benchMat.emissiveIntensity=.35+.3*Math.sin(now*6);
+  wallMat.emissive.setHex(Z.wall?0xc93b3b:0);wallMat.emissiveIntensity=.2+.15*Math.sin(now*4);
+  const mid=rp(A).add(rp(B)).multiplyScalar(.5);fl.position.copy(mid);fl.visible=il.visible=Z.interf;fl.scale.setScalar(1+.4*Math.sin(now*9));fl.material.opacity=.25+.5*ov(U.A,U.B);
+  [rp(A),rp(B)].forEach((p,i)=>il.geometry.attributes.position.setXYZ(i,p.x,p.y,p.z));il.geometry.attributes.position.needsUpdate=true;
+  const src=Z.C?rp(Cc):rp(A),tg=speeds(Z,U);
+  stu.forEach((u,i)=>{cur[i]+=(tg[i]-cur[i])*.05;pgc[i]+=(PG[i]-pgc[i])*.05;const ok=cn(i);u.q.material.color.setHex(ok?colH(cur[i]):(Math.sin(now*10)>0?0x2f7bff:0x9bbcff));const kt=sg&&t>=sg[0]+i*.12?1:0;u.k=(u.k||0)+(kt-(u.k||0))*.09;const k=u.k;u.q.position.set(0,.8+.2*k,-.3+.05*k);u.q.rotation.x=-1.05*k+Math.sin(now*5+i*2)*.06*k;u.h.position.set(0,.88-.03*k,-.05*k);
+   const l=links[i],a=l.geometry.attributes.position;a.setXYZ(0,src.x,src.y,src.z);a.setXYZ(1,u.x,.8,u.z-.3);a.needsUpdate=true;l.material.color.setHex(colH(cur[i]));l.visible=ok&&!!(Z.A||Z.C)});
+  if(sg&&I>0&&t>=sg[2]&&t<sg[3]){dispPh=sg[5];const m=MBp[sg[5]];m.forEach((_,i)=>m[i]+=cur[i]/8*dt)}}
+ const ow=Z.ow||0,on=!!sg,meas=on&&t>=sg[2]&&t<sg[3];
+ S={v:!on?0:t<sg[2]?1:3,meas};
+ const cm=$('cmp');
+ if(I===0||dispPh<0){cm.style.display='none';cm._h=''}else{const pl=s.pl,hd=(meas?'● Medindo… '+Math.ceil(sg[3]-t)+' s':on&&t>=sg[2]?'✔ Medição concluída':'Medições')+' · média dos 6 alunos';
+  const h='<div class="stt'+(meas?'':' d')+'">'+hd+'</div>'+(RFS[I]?'<div class="cm"><span>'+RFS[I][0]+' (ref.)</span><b>'+f1(mean(speeds({A:1,hs:RFS[I][1]},mkU()))/8*4)+' MB</b></div>':'')+[0,1,2].filter(k=>I===3?LB[k]:k<=dispPh&&k<pl.length).map(k=>'<div class="cm'+(k===dispPh&&meas?' n':'')+'"><span>'+(I===3?LB[k]:pl[k])+'</span><b>'+f1(mean(MBp[k]))+' MB</b></div>').join('');
+  cm.style.display='block';if(cm._h!==h){cm.innerHTML=h;cm._h=h}}
+ const asp=sw/sh,kd=Math.max(1,1.2/asp),tgv=V(...(Z.tg||s.tg));
+ camP.lerp(V(...(Z.cam||s.cam)).sub(tgv).multiplyScalar(kd).applyAxisAngle(Y,az+(Z.orb||0)+Math.sin(now*.2)*.06).add(tgv),.05);camT.lerp(tgv,.05);
+ cam.position.copy(camP);cam.lookAt(camT);if(room.visible){animPres(now);rackAnim(now);if(now-ld>.1){drawSlide(now);stx.needsUpdate=true;ld=now}}ren.render(scene,cam);
+ tags.forEach(g=>{if(!g.on()){g.el.style.display='none';return}const p=g.pos().project(cam);if(p.z>1){g.el.style.display='none';return}
+  g.el.style.display='block';g.el.style.left=((p.x*.5+.5)*sw)+'px';g.el.style.top=((-p.y*.5+.5)*sh)+'px';const x=g.txt();if(g.el._t!==x){g.el.textContent=x;g.el._t=x}if(g.col)g.el.style.borderColor=g.col()});
+ if(auto&&t>tot(s)+3&&I<SL.length-1)go(I+1);
+ requestAnimationFrame(loop)}
+syncUI();go(0);requestAnimationFrame(loop);
+})();
+</script></body></html>
